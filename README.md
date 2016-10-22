@@ -12,7 +12,7 @@ activities and relationships, and state security.
 This docker packages **Tor** under [Alpine Linux](https://alpinelinux.org/),
 a lightweight Linux distribution.
 
-Visit [Docker Hub](https://hub.docker.com/r/ogarcia/tor/) to see all
+Visit [Docker Hub](https://hub.docker.com/r/ogarcia/docker-tor/) to see all
 available tags.
 
 ## Run
@@ -24,7 +24,7 @@ docker run -d \
   --name=tor \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
-  ogarcia/tor
+  ogarcia/docker-tor
 ```
 
 This start `tor` client and store config in `/srv/tor/cfg` and data in
@@ -59,7 +59,7 @@ docker run -d \
   -p 127.0.0.1:9050:9050 \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
-  ogarcia/tor
+  ogarcia/docker-tor
 ```
 
 Next, open your browser, set `127.0.0.1:9050` as socks proxy and go to
@@ -85,7 +85,7 @@ docker run -d \
   --name=tor \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
-  ogarcia/tor
+  ogarcia/docker-tor
 ```
 
 ### Other
@@ -103,7 +103,7 @@ docker run -t -i --rm \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
   --entrypoint=/bin/sh \
-  ogarcia/tor
+  ogarcia/docker-tor
 ```
 
 Please note that the `--rm` modifier destroy the docker after shell exit.
@@ -115,5 +115,5 @@ If you need to see a documented config file of `tor`, you can open the
 
 ```sh
 docker run -t -i --rm --entrypoint=/usr/bin/less \
-  ogarcia/tor /etc/tor/torrc.sample
+  ogarcia/docker-tor /etc/tor/torrc.sample
 ```
