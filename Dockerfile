@@ -9,7 +9,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> \
 
 EXPOSE 9001 9050
 
-VOLUME [ "/etc/tor" "/var/lib/tor" ]
+VOLUME [ "/etc/tor", "/var/lib/tor" ]
 
 USER tor
 
