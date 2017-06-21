@@ -1,10 +1,6 @@
-FROM alpine:3.4
+FROM alpine:3.6
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> \
- /etc/apk/repositories \
- && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> \
- /etc/apk/repositories \
- && apk -U --no-progress upgrade \
+RUN apk -U --no-progress upgrade \
  && apk -U --no-progress add tor
 
 EXPOSE 9001 9050
