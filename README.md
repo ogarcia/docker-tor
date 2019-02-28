@@ -1,6 +1,6 @@
 # Small docker of Tor client [![Build Status](https://travis-ci.org/ogarcia/docker-tor.svg?branch=master)](https://travis-ci.org/ogarcia/docker-tor)
 
-(c) 2015-2017 Óscar García Amor
+(c) 2015-2019 Óscar García Amor
 Redistribution, modifications and pull requests are welcomed under the terms
 of GPLv3 license.
 
