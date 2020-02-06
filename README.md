@@ -1,19 +1,24 @@
-# Small docker of Tor client [![Build Status](https://travis-ci.org/ogarcia/docker-tor.svg?branch=master)](https://travis-ci.org/ogarcia/docker-tor)
+# Small docker of Tor client [![CircleCI](https://circleci.com/gh/ogarcia/docker-tor.svg?style=svg)](https://circleci.com/gh/ogarcia/docker-tor)
 
-(c) 2015-2019 Óscar García Amor
+(c) 2015-2020 Óscar García Amor
+
 Redistribution, modifications and pull requests are welcomed under the terms
 of GPLv3 license.
 
-[Tor](https://www.torproject.org/) is free software and an open network that
-helps you defend against traffic analysis, a form of network surveillance
-that threatens personal freedom and privacy, confidential business
-activities and relationships, and state security.
+[Tor][1] is free software and an open network that helps you defend against
+traffic analysis, a form of network surveillance that threatens personal
+freedom and privacy, confidential business activities and relationships, and
+state security.
 
-This docker packages **Tor** under [Alpine Linux](https://alpinelinux.org/),
-a lightweight Linux distribution.
+This docker packages **Tor** under [Alpine Linux][2], a lightweight Linux
+distribution.
 
-Visit [Docker Hub](https://hub.docker.com/r/connectical/tor/) to see all
-available tags.
+Visit [Docker Hub][3] or [Quay][4] to see all available tags.
+
+[1]: https://www.torproject.org/
+[2]: https://alpinelinux.org/
+[3]: https://hub.docker.com/r/connectical/tor/
+[4]: https://quay.io/repository/connectical/tor/
 
 ## Run
 
@@ -90,8 +95,10 @@ docker run -d \
 
 ### Other
 
-You can use `tor` as bridge, enter relay or exit relay, see [Tor
-Docs](https://www.torproject.org/docs/documentation.html.en) for more info.
+You can use `tor` as bridge, enter relay or exit relay, see [Tor Docs][5]
+for more info.
+
+[5]: https://www.torproject.org/docs/documentation.html.en
 
 ## Shell run
 

@@ -1,9 +1,0 @@
-sudo: required
-group: edge
-language: bash
-
-services:
-  - docker
-
-script:
-  - make ci-test
