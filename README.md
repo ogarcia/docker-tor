@@ -1,6 +1,6 @@
 # Small docker of Tor client [![CircleCI](https://circleci.com/gh/ogarcia/docker-tor.svg?style=svg)](https://circleci.com/gh/ogarcia/docker-tor)
 
-(c) 2015-2020 Óscar García Amor
+(c) 2015-2022 Óscar García Amor
 
 Redistribution, modifications and pull requests are welcomed under the terms
 of GPLv3 license.
