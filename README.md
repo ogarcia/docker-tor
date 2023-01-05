@@ -1,6 +1,6 @@
 # Small docker of Tor client [![CircleCI](https://circleci.com/gh/ogarcia/docker-tor.svg?style=svg)](https://circleci.com/gh/ogarcia/docker-tor)
 
-(c) 2015-2022 Óscar García Amor
+(c) 2015-2023 Óscar García Amor
 
 Redistribution, modifications and pull requests are welcomed under the terms
 of GPLv3 license.
@@ -13,12 +13,13 @@ state security.
 This docker packages **Tor** under [Alpine Linux][2], a lightweight Linux
 distribution.
 
-Visit [Docker Hub][3] or [Quay][4] to see all available tags.
+Visit [Docker Hub][3], [Quay][4] or [GitHub][5] to see all available tags.
 
 [1]: https://www.torproject.org/
 [2]: https://alpinelinux.org/
 [3]: https://hub.docker.com/r/connectical/tor/
 [4]: https://quay.io/repository/connectical/tor/
+[5]: https://github.com/orgs/connectical/packages/container/package/tor
 
 ## Run
 
@@ -95,10 +96,10 @@ docker run -d \
 
 ### Other
 
-You can use `tor` as bridge, enter relay or exit relay, see [Tor Docs][5]
+You can use `tor` as bridge, enter relay or exit relay, see [Tor Docs][6]
 for more info.
 
-[5]: https://www.torproject.org/docs/documentation.html.en
+[6]: https://www.torproject.org/docs/documentation.html.en
 
 ## Shell run
 
