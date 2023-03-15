@@ -13,11 +13,11 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run:
-          name: Build Docker image
-          command: make docker-build
+          name: Build container image
+          command: make container-build
       - run:
-          name: Save Docker image
-          command: DOCKER_IMAGE_FILENAME=image.tar make docker-save
+          name: Save container image
+          command: CONTAINER_IMAGE_FILENAME=image.tar make container-save
       - persist_to_workspace:
           root: .
           paths:
@@ -31,25 +31,11 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run:
-          name: Load archived Docker image
-          command: DOCKER_IMAGE_FILENAME=/tmp/workspace/image.tar make docker-load
+          name: Load archived container image
+          command: CONTAINER_IMAGE_FILENAME=/tmp/workspace/image.tar make container-load
       - run:
-          name: Test Docker image
-          command: make docker-test
-  publish-dockerhub:
-    executor: docker-build-jammy
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - checkout
-      - setup_remote_docker:
-          version: 20.10.14
-      - run:
-          name: Load archived Docker image
-          command: DOCKER_IMAGE_FILENAME=/tmp/workspace/image.tar make docker-load
-      - run:
-          name: Push Docker image to Docker Hub
-          command: make dockerhub-push
+          name: Test container image
+          command: make container-test
   publish-quay:
     executor: docker-build-jammy
     steps:
@@ -59,10 +45,10 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run:
-          name: Load archived Docker image
-          command: DOCKER_IMAGE_FILENAME=/tmp/workspace/image.tar make docker-load
+          name: Load archived container image
+          command: CONTAINER_IMAGE_FILENAME=/tmp/workspace/image.tar make container-load
       - run:
-          name: Push Docker image to Quay.io
+          name: Push container image to Quay.io
           command: make quay-push
   publish-github-registry:
     executor: docker-build-jammy
@@ -73,10 +59,10 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run:
-          name: Load archived Docker image
-          command: DOCKER_IMAGE_FILENAME=/tmp/workspace/image.tar make docker-load
+          name: Load archived container image
+          command: CONTAINER_IMAGE_FILENAME=/tmp/workspace/image.tar make container-load
       - run:
-          name: Push Docker image to ghcr.io
+          name: Push container image to ghcr.io
           command: make github-registry-push
 
 workflows:
@@ -87,10 +73,6 @@ workflows:
       - test:
           requires:
             - build
-      - publish-dockerhub:
-          context: dockerhub
-          requires:
-            - test
       - publish-quay:
           context: quay-nn
           requires:

@@ -1,4 +1,4 @@
-# Small docker of Tor client [![CircleCI](https://circleci.com/gh/ogarcia/docker-tor.svg?style=svg)](https://circleci.com/gh/ogarcia/docker-tor)
+# Small container of Tor client [![CircleCI](https://circleci.com/gh/ogarcia/docker-tor.svg?style=svg)](https://circleci.com/gh/ogarcia/docker-tor)
 
 (c) 2015-2023 Óscar García Amor
 
@@ -10,16 +10,15 @@ traffic analysis, a form of network surveillance that threatens personal
 freedom and privacy, confidential business activities and relationships, and
 state security.
 
-This docker packages **Tor** under [Alpine Linux][2], a lightweight Linux
+This container packages **Tor** under [Alpine Linux][2], a lightweight Linux
 distribution.
 
-Visit [Docker Hub][3], [Quay][4] or [GitHub][5] to see all available tags.
+Visit [Quay][3] or [GitHub][4] to see all available tags.
 
 [1]: https://www.torproject.org/
 [2]: https://alpinelinux.org/
-[3]: https://hub.docker.com/r/connectical/tor/
-[4]: https://quay.io/repository/connectical/tor/
-[5]: https://github.com/orgs/connectical/packages/container/package/tor
+[3]: https://quay.io/repository/connectical/tor/
+[4]: https://github.com/orgs/connectical/packages/container/package/tor
 
 ## Run
 
@@ -30,7 +29,7 @@ docker run -d \
   --name=tor \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
-  connectical/tor
+  ghcr.io/connectical/tor
 ```
 
 This start `tor` client and store config in `/srv/tor/cfg` and data in
@@ -65,7 +64,7 @@ docker run -d \
   -p 127.0.0.1:9050:9050 \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
-  connectical/tor
+  ghcr.io/connectical/tor
 ```
 
 Next, open your browser, set `127.0.0.1:9050` as socks proxy and go to
@@ -91,7 +90,7 @@ docker run -d \
   --name=tor \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
-  connectical/tor
+  ghcr.io/connectical/tor
 ```
 
 ### Other
@@ -111,10 +110,10 @@ docker run -t -i --rm \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
   --entrypoint=/bin/sh \
-  connectical/tor
+  ghcr.io/connectical/tor
 ```
 
-Please note that the `--rm` modifier destroy the docker after shell exit.
+Please note that the `--rm` modifier destroy the container after shell exit.
 
 ## See tor sample config
 
@@ -123,5 +122,5 @@ If you need to see a documented config file of `tor`, you can open the
 
 ```sh
 docker run -t -i --rm --entrypoint=/usr/bin/less \
-  connectical/tor /etc/tor/torrc.sample
+  ghcr.io/connectical/tor /etc/tor/torrc.sample
 ```
