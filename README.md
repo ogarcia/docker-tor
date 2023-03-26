@@ -17,7 +17,7 @@ Visit [Quay][3] or [GitHub][4] to see all available tags.
 
 [1]: https://www.torproject.org/
 [2]: https://alpinelinux.org/
-[3]: https://quay.io/repository/connectical/tor/
+[3]: https://quay.io/repository/connectical/tor
 [4]: https://github.com/orgs/connectical/packages/container/package/tor
 
 ## Run
