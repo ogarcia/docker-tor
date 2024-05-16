@@ -34,7 +34,7 @@ docker run -d \
   --name=tor \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
-  ghcr.io/connectical/tor
+  registry.gitlab.com/connectical/container/tor
 ```
 
 This start `tor` client and store config in `/srv/tor/cfg` and data in
@@ -70,7 +70,7 @@ docker run -d \
   -p 127.0.0.1:9050:9050 \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
-  ghcr.io/connectical/tor
+  registry.gitlab.com/connectical/container/tor
 ```
 
 Next, open your browser, set `127.0.0.1:9050` as socks proxy and go to
@@ -97,7 +97,7 @@ docker run -d \
   --name=tor \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
-  ghcr.io/connectical/tor
+  registry.gitlab.com/connectical/container/tor
 ```
 
 ### Other
@@ -118,7 +118,7 @@ docker run -t -i --rm \
   -v /srv/tor/cfg:/etc/tor \
   -v /srv/tor/data:/var/lib/tor \
   --entrypoint=/bin/sh \
-  ghcr.io/connectical/tor
+  registry.gitlab.com/connectical/container/tor
 ```
 
 Please note that the `--rm` modifier destroy the container after shell exit.
@@ -131,5 +131,5 @@ If you need to see a documented config file of `tor`, you can open the
 ```sh
 alias docker="podman" # If you are using podman
 docker run -t -i --rm --entrypoint=/usr/bin/less \
-  ghcr.io/connectical/tor /etc/tor/torrc.sample
+  registry.gitlab.com/connectical/container/tor /etc/tor/torrc.sample
 ```
