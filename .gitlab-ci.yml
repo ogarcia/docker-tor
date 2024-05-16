@@ -1,0 +1,18 @@
+variables:
+  ALPINE_VERSION: latest
+  QUAY_REGISTRY_IMAGE: quay.io/connectical/tor
+
+stages:
+  - Container
+
+Build and push container image:
+  stage: Container
+  image: docker
+  services:
+    - docker:dind
+  script:
+    - docker context create builder
+    - docker buildx create builder --use
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
+    - docker login -u ${QUAY_USERNAME} -p ${QUAY_PASSWORD} quay.io
+    - docker buildx build --push --platform linux/amd64,linux/arm64,linux/arm/v7 --build-arg ALPINE_VERSION=${ALPINE_VERSION} --tag ${CI_REGISTRY_IMAGE}:latest --tag ${QUAY_REGISTRY_IMAGE}:latest .

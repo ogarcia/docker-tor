@@ -1,30 +1,31 @@
-# Small container of Tor client [![CircleCI](https://circleci.com/gh/ogarcia/docker-tor.svg?style=svg)](https://circleci.com/gh/ogarcia/docker-tor)
+# Small container of Tor client
 
-(c) 2015-2023 Óscar García Amor
+(c) 2015-2024 [Connectical] Óscar García Amor
 
 Redistribution, modifications and pull requests are welcomed under the terms
 of GPLv3 license.
 
-[Tor][1] is free software and an open network that helps you defend against
+[Tor][to] is free software and an open network that helps you defend against
 traffic analysis, a form of network surveillance that threatens personal
 freedom and privacy, confidential business activities and relationships, and
 state security.
 
-This container packages **Tor** under [Alpine Linux][2], a lightweight Linux
-distribution.
+This container packages **Tor** under [Alpine Linux][al], a lightweight
+Linux distribution.
 
-Visit [Quay][3] or [GitHub][4] to see all available tags.
+Visit [Quay][qu] or [GitLab][gl] to see all available tags.
 
-[1]: https://www.torproject.org/
-[2]: https://alpinelinux.org/
-[3]: https://quay.io/repository/connectical/tor
-[4]: https://github.com/orgs/connectical/packages/container/package/tor
+[to]: https://www.torproject.org/
+[al]: https://alpinelinux.org/
+[qu]: https://quay.io/repository/connectical/tor
+[gl]: https://gitlab.com/connectical/container/tor/container_registry
 
 ## Run
 
 To run this container, simply exec.
 
 ```sh
+alias docker="podman" # If you are using podman
 docker run -d \
   --name=tor \
   -v /srv/tor/cfg:/etc/tor \
@@ -59,6 +60,7 @@ DataDirectory /var/lib/tor
 And run it.
 
 ```sh
+alias docker="podman" # If you are using podman
 docker run -d \
   --name=tor \
   -p 127.0.0.1:9050:9050 \
@@ -86,6 +88,7 @@ HiddenServicePort 443 192.30.253.112:443
 And run it.
 
 ```sh
+alias docker="podman" # If you are using podman
 docker run -d \
   --name=tor \
   -v /srv/tor/cfg:/etc/tor \
@@ -105,6 +108,7 @@ for more info.
 If you can run a shell instead `tor` command, simply do.
 
 ```sh
+alias docker="podman" # If you are using podman
 docker run -t -i --rm \
   --name=tor \
   -v /srv/tor/cfg:/etc/tor \
@@ -115,12 +119,13 @@ docker run -t -i --rm \
 
 Please note that the `--rm` modifier destroy the container after shell exit.
 
-## See tor sample config
+## See Tor sample config
 
 If you need to see a documented config file of `tor`, you can open the
 `torrc.sample` with following command.
 
 ```sh
+alias docker="podman" # If you are using podman
 docker run -t -i --rm --entrypoint=/usr/bin/less \
   ghcr.io/connectical/tor /etc/tor/torrc.sample
 ```
