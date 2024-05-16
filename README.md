@@ -1,5 +1,9 @@
 # Small container of Tor client
 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-crayons.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-responsibility.svg)](https://forthebadge.com)
+
 (c) 2015-2024 [Connectical] Óscar García Amor
 
 Redistribution, modifications and pull requests are welcomed under the terms
