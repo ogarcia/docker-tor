@@ -1,6 +1,7 @@
 variables:
   ALPINE_VERSION: latest
   QUAY_REGISTRY_IMAGE: quay.io/connectical/tor
+  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
 
 stages:
   - Container
