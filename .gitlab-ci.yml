@@ -2,6 +2,7 @@ variables:
   ALPINE_VERSION: latest
   QUAY_REGISTRY_IMAGE: quay.io/connectical/tor
   BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+  FORCE_BUILD: "false"
 
 stages:
   - Container
@@ -11,9 +12,36 @@ Build and push container image:
   image: docker
   services:
     - docker:dind
+  before_script:
+    - apk --no-cache add jq
   script:
-    - docker context create builder
-    - docker buildx create builder --use
     - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
     - docker login -u ${QUAY_USERNAME} -p ${QUAY_PASSWORD} quay.io
-    - docker buildx build --push --platform linux/amd64,linux/arm64,linux/arm/v7 --build-arg ALPINE_VERSION=${ALPINE_VERSION} --tag ${CI_REGISTRY_IMAGE}:latest --tag ${QUAY_REGISTRY_IMAGE}:latest .
+    # Get the list of packages that the image would have if built now
+    - PACKAGES=$(docker run --rm docker.io/alpine:${ALPINE_VERSION} sh -c 'apk -U -q --no-progress upgrade >/dev/null && apk -q --no-progress add tor >/dev/null && apk info -v | sort')
+    - TOR_VERSION=$(echo "${PACKAGES}" | sed -n 's/^tor-\([0-9].*\)$/\1/p')
+    - PACKAGES_DIGEST=sha256:$(echo "${PACKAGES}" | sha256sum | cut -d' ' -f1)
+    - echo "Upstream versions -> tor ${TOR_VERSION}, packages ${PACKAGES_DIGEST}"
+    # Get versions of the published image (empty if not exists or not annotated)
+    - PUBLISHED=$(docker buildx imagetools inspect --raw ${CI_REGISTRY_IMAGE}:latest 2>/dev/null || true)
+    - PUBLISHED_TOR_VERSION=$(echo "${PUBLISHED}" | jq -r '.annotations["org.opencontainers.image.version"] // empty' 2>/dev/null || true)
+    - PUBLISHED_PACKAGES_DIGEST=$(echo "${PUBLISHED}" | jq -r '.annotations["com.connectical.packages.digest"] // empty' 2>/dev/null || true)
+    - echo "Published versions -> tor ${PUBLISHED_TOR_VERSION:-none}, packages ${PUBLISHED_PACKAGES_DIGEST:-none}"
+    # Only scheduled pipelines are allowed to skip the build
+    - |
+      if [ "${CI_PIPELINE_SOURCE}" = "schedule" ] && [ "${FORCE_BUILD}" != "true" ] \
+        && [ "${PACKAGES_DIGEST}" = "${PUBLISHED_PACKAGES_DIGEST}" ]; then
+        echo "No changes in packages, skipping build"
+        exit 0
+      fi
+    - docker context create builder
+    - docker buildx create builder --use
+    - >
+      docker buildx build --push
+      --platform linux/amd64,linux/arm64,linux/arm/v7
+      --build-arg ALPINE_VERSION=${ALPINE_VERSION}
+      --annotation "index:org.opencontainers.image.version=${TOR_VERSION}"
+      --annotation "index:org.opencontainers.image.base.name=docker.io/alpine:${ALPINE_VERSION}"
+      --annotation "index:com.connectical.packages.digest=${PACKAGES_DIGEST}"
+      --tag ${CI_REGISTRY_IMAGE}:latest
+      --tag ${QUAY_REGISTRY_IMAGE}:latest .
